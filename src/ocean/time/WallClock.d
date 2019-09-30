@@ -59,18 +59,6 @@ struct WallClock
 
     /***************************************************************************
 
-        Returns
-            the timezone relative to GMT. The value is negative when west of GMT
-
-    ***************************************************************************/
-
-    static TimeSpan zone ()
-    {
-        return TimeSpan.fromSeconds(-timezone);
-    }
-
-    /***************************************************************************
-
         Set fields to represent a local version of the current UTC time
 
         All values must fall within the domain supported by the OS

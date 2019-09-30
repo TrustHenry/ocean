@@ -306,9 +306,10 @@ public struct Log
 
     ***************************************************************************/
 
-    public static void config (OutputStream stream, bool flush = true)
+    public static void defaultConfig ()
     {
-        This.root.add(new AppendStream(stream, flush));
+        import ocean.util.log.AppendConsole;
+        This.root.add(new AppendConsole());
     }
 
     /***************************************************************************
@@ -778,7 +779,7 @@ public final class Logger : ILogger
 
     ***************************************************************************/
 
-    public Logger append (Level level, lazy cstring exp)
+    public Logger append (Level level, lazy cstring exp) @trusted
     {
         if (host_.context.enabled (level_, level))
         {
@@ -868,7 +869,7 @@ public final class Logger : ILogger
 
     ***************************************************************************/
 
-    public void format (Args...) (Level level, cstring fmt, Args args)
+    public void format (Args...) (Level level, cstring fmt, Args args) @safe
     {
         static if (Args.length == 0)
             this.append(level, fmt);
